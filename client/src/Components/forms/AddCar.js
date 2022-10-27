@@ -91,7 +91,7 @@ const AddCar = () => {
                     >
                         {data.people.map((person) => (
                             <Select.Option key={person.id} >
-                                {person.id}
+                                {person.firstName} {person.lastName}
                             </Select.Option>
                         ))}
                     </Select>
