@@ -12,7 +12,7 @@ const Title = () => {
     const styles = getStyles()
 
     return (
-        <h1 style={styles.title}>It's all about who you know!</h1>
+        <h1 style={styles.title}>People and their Cars</h1>
     )
 }
 
