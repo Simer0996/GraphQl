@@ -5,8 +5,9 @@ const RemoveCar = () => {
 
 
 
-    return (
-        <DeleteOutlined key='delete' onClick={handleDelete()} style={{ color: 'red' }} />
+    return (<>
+        {/* <DeleteOutlined key='delete' onClick={handleDelete} style={{ color: 'red' }} /> */}
+    </>
     )
 }
 
