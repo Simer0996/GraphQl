@@ -108,3 +108,21 @@ export const UPDATE_CAR = gql`
   }
 `;
 
+//Get People and Cars
+export const GET_CONTENT = gql`
+{
+    people {
+        id,
+        firstName,
+        lastName,
+}
+cars {
+    id
+    year
+    make
+    model
+    price
+    personId
+  }
+}
+`
