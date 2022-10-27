@@ -6,20 +6,21 @@ import filter from 'lodash/filter'
 
 const RemovePerson = ({ id }) => {
 
-    const [removePerson] = useMutation(REMOVE_PERSON, {
-        update(cache, { data: { removePerson } }) {
-            const { people } = cache.readQuery({ query: GET_PEOPLE });
-            cache.writeQuery({
-                query: GET_PEOPLE,
-                data: {
-                    people: filter(people, o => o.id !== removePerson.id),
-                },
-            });
-        },
-    });
+    const [removePerson] = useMutation(REMOVE_PERSON,
+        {
+            update(cache, { data: { removePerson } }) {
+                const { people } = cache.readQuery({ query: GET_PEOPLE });
+                cache.writeQuery({
+                    query: GET_PEOPLE,
+                    data: {
+                        people: filter(people, o => o.id !== removePerson.id),
+                    },
+                });
+            },
+        }
+    );
 
     const handleDelete = () => {
-
         let result = window.confirm("Are you sure you want to delete this record?")
         if (result) {
             removePerson({
