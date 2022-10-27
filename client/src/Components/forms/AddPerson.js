@@ -43,32 +43,35 @@ const AddPerson = () => {
 
 
     return (
-        <Form form={form} name="add-people-form" onFinish={onFinish} layout="inline" size="large" style={{ marginBottom: '40px' }
-        }>
-            <Form.Item name="firstName"
-                rules={[{ required: true, message: "Please input your first name!" }]}>
-                <Input placeholder="i.e. John" />
-            </Form.Item>
-            <Form.Item name="lastName"
-                rules={[{ required: true, message: "Please input your last name!" }]}>
-                <Input placeholder="i.e. Smith" />
-            </Form.Item>
-            <Form.Item shouldUpdate={true}>
-                {() => (
-                    <Button
-                        type='primary'
-                        htmlType='submit'
-                        disabled={
-                            !form.isFieldsTouched(true) ||
-                            form.getFieldError().filter(({ errors }) => errors.length)
-                                .length
-                        }
-                    >
-                        Add Person
-                    </Button>
-                )}
-            </Form.Item>
-        </Form >
+        <>
+            <h1>Add a Person</h1>
+            <Form form={form} name="add-people-form" onFinish={onFinish} layout="inline" size="large" style={{ marginBottom: '40px' }
+            }>
+                <Form.Item name="firstName"
+                    rules={[{ required: true, message: "Please input your first name!" }]}>
+                    <Input placeholder="i.e. John" />
+                </Form.Item>
+                <Form.Item name="lastName"
+                    rules={[{ required: true, message: "Please input your last name!" }]}>
+                    <Input placeholder="i.e. Smith" />
+                </Form.Item>
+                <Form.Item shouldUpdate={true}>
+                    {() => (
+                        <Button
+                            type='primary'
+                            htmlType='submit'
+                            disabled={
+                                !form.isFieldsTouched(true) ||
+                                form.getFieldError().filter(({ errors }) => errors.length)
+                                    .length
+                            }
+                        >
+                            Add Person
+                        </Button>
+                    )}
+                </Form.Item>
+            </Form >
+        </>
     )
 }
 

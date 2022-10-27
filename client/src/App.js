@@ -2,6 +2,8 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client"
 import './App.css';
 import Title from "./Components/layout/Title";
 import AddPerson from "./Components/forms/AddPerson";
+import AddCar from "./Components/forms/AddCar"
+
 // import Cars from "./Components/lists/Cars"
 import People from "./Components/lists/People";
 
@@ -17,7 +19,7 @@ function App() {
       <div className="App">
         <Title />
         <AddPerson />
-        {/* <Cars /> */}
+        <AddCar />
         <People />
       </div>
     </ApolloProvider>

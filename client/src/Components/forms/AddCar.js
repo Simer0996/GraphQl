@@ -46,7 +46,7 @@ const AddCar = () => {
 
     return (
         <>
-            <h2>Add a Car</h2>
+            <h1>Add a Car</h1>
             <Form
                 form={form}
                 name="add-car-form"
