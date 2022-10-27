@@ -22,7 +22,7 @@ mutation AddPerson($id: String!, $firstName: String!, $lastName: String!) {
 `
 
 export const UPDATE_PERSON = gql`
-mutation updatePerson($id: String!, $firstName: String!, $lastName: String!) {
+mutation UpdatePerson($id: String!, $firstName: String!, $lastName: String!) {
     updatePerson(id: $id, firstName: $firstName, lastName: $lastName) {
         id,
         firstName,
@@ -32,7 +32,7 @@ mutation updatePerson($id: String!, $firstName: String!, $lastName: String!) {
 `
 
 export const REMOVE_PERSON = gql`
-  mutation removePerson($id: String!) {
+  mutation RemovePerson($id: String!) {
     removePerson(id: $id) {
       id
       firstName
@@ -82,7 +82,7 @@ export const REMOVE_CAR = gql`
 `;
 
 export const UPDATE_CAR = gql`
-  mutation Mutation(
+  mutation UpdateCar(
     $id: String!
     $year: Int
     $make: String

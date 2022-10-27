@@ -12,7 +12,6 @@ const getStyles = () => ({
 
 const Person = ({ id, firstName, lastName }) => {
     const [editMode, setEditMode] = useState(false)
-
     const handleEdit = () => {
         setEditMode(!editMode)
     }

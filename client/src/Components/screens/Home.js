@@ -14,7 +14,9 @@ const Home = () => {
         <div>
             <AddPerson />
             {data.people.length > 0 && <AddCar />}
-            <People />
+            <div style={{ marginTop: "10%" }}>
+                <People />
+            </div>
         </div>
     )
 }

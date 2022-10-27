@@ -8,9 +8,9 @@ const AddCar = () => {
 
     const [id] = useState(uuidv4())
     const [addCar] = useMutation(ADD_CAR);
+
     const [form] = Form.useForm();
     const [, forceUpdate] = useState();
-
 
     useEffect(() => {
         forceUpdate({})
@@ -21,7 +21,8 @@ const AddCar = () => {
     if (error) return `Error! ${error.message}`;
 
     const onFinish = values => {
-        const { make, model, year, price } = values;
+        const { make, model, year } = values;
+        const price = parseInt(values.price);
 
         addCar({
             variables: {
@@ -46,7 +47,7 @@ const AddCar = () => {
 
     return (
         <>
-            <h1>Add a Car</h1>
+            <h1 style={{ textAlign: "center" }}>Add a Car</h1>
             <Form
                 form={form}
                 name="add-car-form"
@@ -112,7 +113,6 @@ const AddCar = () => {
                     )}
                 </Form.Item>
             </Form>
-
         </>
     )
 }
