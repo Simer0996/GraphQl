@@ -10,7 +10,6 @@ const Home = () => {
     if (loading) return "Loading...";
     if (error) return `Error! ${error.message}`;
 
-
     const carOwner = data.people.map(person => {
         return {
             ...person,

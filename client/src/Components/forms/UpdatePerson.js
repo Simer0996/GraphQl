@@ -26,7 +26,7 @@ const UpdatePerson = ({ onButtonClick, id, firstName, lastName }) => {
     }
 
     return (
-        <Form form={form} name='update-people-form' layout='inline' onFinish={onFinish} initialValues={{ firstName: firstName, lastName: lastName }}>
+        <Form form={form} name='update-people-form' layout='inline' onFinish={onFinish} >
             <Form.Item name="firstName" rules={[{ required: true, message: "Please input your first name" }]} >
                 <Input placeholder='i.e. john' />
             </Form.Item>
@@ -35,10 +35,12 @@ const UpdatePerson = ({ onButtonClick, id, firstName, lastName }) => {
             </Form.Item>
             <Form.Item shouldUpdate={true}>
                 {() => (
-                    <Button type="primary" htmlType='submit' disabled={
-                        (!form.isFieldsTouched('firstName', firstName) && !form.isFieldsTouched('lastName', lastName)) ||
-                        form.getFieldError().filter(({ errors }) => errors.length).length
-                    }>Update </Button>
+                    <Button type="primary" htmlType='submit'
+                        disabled={
+                            (!form.isFieldsTouched('firstName', firstName) && !form.isFieldsTouched('lastName', lastName)) ||
+                            form.getFieldError().filter(({ errors }) => errors.length).length
+                        }
+                    >Update </Button>
                 )}
 
             </Form.Item>

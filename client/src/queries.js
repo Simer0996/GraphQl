@@ -126,3 +126,26 @@ cars {
   }
 }
 `
+
+export const GET_PERSON_WITH_CARS = gql`
+  query Person($personId: String!) {
+    person(id: $personId) {
+      id
+      firstName
+      lastName
+    }
+    people {
+      id
+      firstName
+      lastName
+    }
+    cars {
+      id
+      year
+      make
+      model
+      price
+      personId
+    }
+  }
+`;

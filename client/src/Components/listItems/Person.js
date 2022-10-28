@@ -4,6 +4,7 @@ import RemovePerson from '../buttons/RemovePerson'
 import { EditOutlined } from '@ant-design/icons'
 import UpdatePerson from '../forms/UpdatePerson'
 import Car from './Car'
+import { Link } from 'react-router-dom'
 
 const getStyles = () => ({
     card: {
@@ -17,6 +18,7 @@ const Person = ({ id, firstName, lastName, carOwner }) => {
         setEditMode(!editMode)
     }
 
+    // console.log(carOwner)
     const styles = getStyles()
     return (
         <>
@@ -25,14 +27,24 @@ const Person = ({ id, firstName, lastName, carOwner }) => {
                     <EditOutlined key='edit' onClick={handleEdit} />,
                     <RemovePerson id={id} />
                 ]}>
-                    {firstName} {lastName}
-                </Card>
+                    <p> {firstName} {lastName}</p>
 
+
+
+                    {carOwner?.map(car => (
+                        <Car key={car.id} make={car.make} model={car.model} />
+                    ))}
+                    <Link
+                        to={`/people/${id}`}
+                        style={{
+                            textDecoration: 'underline',
+                            color: 'blue',
+                        }}
+                    >Learn More</Link>
+                </Card>
             }
-            {carOwner.map(({ car }) => (
-                // <Car key={car.id} id={car.id} make={car.make} model={car.model} />
-                console.log(car)
-            ))}
+
+
         </>
     )
 }

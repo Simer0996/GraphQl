@@ -156,7 +156,7 @@ const UpdateCar = (props) => {
                             (!form.isFieldTouched("year") &&
                                 !form.isFieldTouched("make") &&
                                 !form.isFieldTouched("model") &&
-                                !form.isFieldTouched("price") ||
+                                !form.isFieldTouched("price") &&
                                 form.getFieldsError().filter(({ errors }) => errors.length).length
                             )}
                     >
