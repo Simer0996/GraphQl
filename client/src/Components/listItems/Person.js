@@ -3,6 +3,7 @@ import { Card } from 'antd'
 import RemovePerson from '../buttons/RemovePerson'
 import { EditOutlined } from '@ant-design/icons'
 import UpdatePerson from '../forms/UpdatePerson'
+import Car from './Car'
 
 const getStyles = () => ({
     card: {
@@ -10,7 +11,7 @@ const getStyles = () => ({
     }
 })
 
-const Person = ({ id, firstName, lastName }) => {
+const Person = ({ id, firstName, lastName, carOwner }) => {
     const [editMode, setEditMode] = useState(false)
     const handleEdit = () => {
         setEditMode(!editMode)
@@ -26,7 +27,12 @@ const Person = ({ id, firstName, lastName }) => {
                 ]}>
                     {firstName} {lastName}
                 </Card>
+
             }
+            {carOwner.map(({ car }) => (
+                // <Car key={car.id} id={car.id} make={car.make} model={car.model} />
+                console.log(car)
+            ))}
         </>
     )
 }
