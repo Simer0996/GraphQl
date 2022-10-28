@@ -5,12 +5,7 @@ import UpdateCar from "../forms/UpdateCar";
 import { EditOutlined } from "@ant-design/icons";
 
 const CarDetails = (props) => {
-    const [id] = useState(props.id);
-    const [, setYear] = useState(props.year);
-    const [, setMake] = useState(props.make);
-    const [, setModel] = useState(props.model);
-    const [, setPrice] = useState(props.price);
-    const [personId, setPersonId] = useState(props.personId);
+    const [id] = useState(props.id)
     const [editMode, setEditMode] = useState(false);
 
     const handleEdit = () => {
@@ -26,7 +21,7 @@ const CarDetails = (props) => {
                     make={props.make}
                     model={props.model}
                     price={props.price}
-                    personId={personId}
+                    personId={props.personId}
                     onButtonClick={handleEdit}
 
                 />

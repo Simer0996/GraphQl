@@ -14,6 +14,9 @@ const ShowDetails = () => {
     if (loading) return "Loading...";
     if (error) return `Error! ${error.message}`;
 
+
+
+
     let { cars, person } = data
     let carsArray = []
 

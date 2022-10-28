@@ -45,20 +45,21 @@ const AddPerson = () => {
     return (
         <>
             <h1 style={{ textAlign: "center" }}>Add a Person</h1>
-            <div style={{ width: "60%", display: "block", margin: "auto" }}>
+            <div style={{ width: "90%", marginLeft: "600px" }}>
                 <Form form={form} name="add-people-form" onFinish={onFinish} layout="inline" size="large" style={{ marginBottom: '40px' }
                 }>
                     <Form.Item name="firstName"
                         rules={[{ required: true, message: "Please input your first name!" }]}>
-                        <Input placeholder="i.e. John" />
+                        First Name: <Input placeholder="First Name" />
                     </Form.Item>
                     <Form.Item name="lastName"
                         rules={[{ required: true, message: "Please input your last name!" }]}>
-                        <Input placeholder="i.e. Smith" />
+                        Last Name:   <Input placeholder="Last Name" />
                     </Form.Item>
                     <Form.Item shouldUpdate={true}>
                         {() => (
                             <Button
+                                style={{ marginTop: "22px" }}
                                 type='primary'
                                 htmlType='submit'
                                 disabled={

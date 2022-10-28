@@ -4,6 +4,7 @@ import AddCar from "../forms/AddCar"
 import People from "../lists/People"
 import { GET_CONTENT } from "../../queries"
 import { useQuery } from "@apollo/client"
+import Title from "../layout/Title"
 
 const Home = () => {
     const { loading, error, data } = useQuery(GET_CONTENT);
@@ -18,7 +19,8 @@ const Home = () => {
     })
 
     return (
-        <div>
+        <div className="App">
+            <Title />
             <AddPerson />
             {data.people.length > 0 && <AddCar />}
             <div style={{ marginTop: "10%" }}>

@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client'
 import { GET_PEOPLE, REMOVE_PERSON, REMOVE_CAR } from "../../queries"
 import filter from 'lodash/filter'
 
-const RemovePerson = ({ id, CarOwner }) => {
+const RemovePerson = ({ id, carOwner }) => {
 
     const [removePerson] = useMutation(REMOVE_PERSON, {
         update(cache, { data: { removePerson } }) {
@@ -29,10 +29,10 @@ const RemovePerson = ({ id, CarOwner }) => {
                 }
             })
 
-            for (let i = 0; i < CarOwner.length; i++) {
+            for (let i = 0; i < carOwner.length; i++) {
                 removeCar({
                     variable: {
-                        id: CarOwner[i].id
+                        id: carOwner[i].id
                     }
                 })
             }

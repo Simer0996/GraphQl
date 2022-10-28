@@ -60,33 +60,33 @@ const AddCar = () => {
                     rules={[{ required: true, message: "Please input the year of the car", },
                     ]}
                 >
-                    <Input placeholder="i.e. 1980"></Input>
+                    <span>Year: <Input placeholder="Year"></Input></span>
                 </Form.Item>
                 <Form.Item
                     name="make"
                     rules={[{ required: true, message: "Please input the make of the car" },
                     ]}
                 >
-                    <Input placeholder="i.e. Ford"></Input>
+                    Make: <Input placeholder="Make"></Input>
                 </Form.Item>
                 <Form.Item
                     name="model"
                     rules={[{ required: true, message: "Please input the model of the car" },
                     ]}
                 >
-                    <Input placeholder="i.e. Mustang"></Input>
+                    Model: <Input placeholder="Model"></Input>
                 </Form.Item>
                 <Form.Item
                     name="price"
                     rules={[{ required: true, message: "Please input the price of the car" }]}
                 >
-                    <Input placeholder="i.e. 20,000"></Input>
+                    Price: <Input placeholder="Price"></Input>
                 </Form.Item>
                 <Form.Item
                     rules={[{ required: true, message: "Please select the owner of the car" }
                     ]}
                 >
-                    <Select
+                    Person: <Select
                         placeholder="Select a person"
                         name="person"
                     >
@@ -100,6 +100,7 @@ const AddCar = () => {
                 <Form.Item shouldUpdate={true}>
                     {() => (
                         <Button
+                            style={{ marginTop: "22px" }}
                             type="primary"
                             htmlType="submit"
                             disabled={
