@@ -10,12 +10,20 @@ const Home = () => {
     if (loading) return "Loading...";
     if (error) return `Error! ${error.message}`;
 
+
+    const carOwner = data.people.map(person => {
+        return {
+            ...person,
+            carOwner: data.cars.filter(car => car.ownerId === person.id)
+        }
+    })
+
     return (
         <div>
             <AddPerson />
             {data.people.length > 0 && <AddCar />}
             <div style={{ marginTop: "10%" }}>
-                <People />
+                <People carOwner={carOwner} />
             </div>
         </div>
     )

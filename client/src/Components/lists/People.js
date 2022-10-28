@@ -11,7 +11,7 @@ const getStyles = () => ({
     }
 })
 
-const People = () => {
+const People = ({ carOwner }) => {
     const styles = getStyles()
 
     const { loading, error, data } = useQuery(GET_PEOPLE)
@@ -21,9 +21,10 @@ const People = () => {
     return (
         <List grid={{ gutter: 20, column: 1 }} style={styles.list}>
             {data.people.map(person => (
-                <List.Item key={person.id}><Person id={person.id} firstName={person.firstName} lastName={person.lastName} /></List.Item>
-            ))}
-        </List>
+                <List.Item key={person.id} > <Person id={person.id} firstName={person.firstName} lastName={person.lastName} carOwner={carOwner} /></List.Item>
+            ))
+            }
+        </List >
     )
 }
 

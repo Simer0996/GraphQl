@@ -36,7 +36,7 @@ const UpdatePerson = ({ onButtonClick, id, firstName, lastName }) => {
             <Form.Item shouldUpdate={true}>
                 {() => (
                     <Button type="primary" htmlType='submit' disabled={
-                        (!form.isFieldsTouched('firstName') && !form.isFieldsTouched('lastName')) ||
+                        (!form.isFieldsTouched('firstName', firstName) && !form.isFieldsTouched('lastName', lastName)) ||
                         form.getFieldError().filter(({ errors }) => errors.length).length
                     }>Update </Button>
                 )}
