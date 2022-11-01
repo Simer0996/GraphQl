@@ -22,7 +22,7 @@ const people = [
 const cars = [
     {
         id: "1",
-        year: "2019",
+        year: "2016",
         make: "Toyota",
         model: "Corolla",
         price: "40000",
@@ -30,7 +30,7 @@ const cars = [
     },
     {
         id: "2",
-        year: "2018",
+        year: "2016",
         make: "Lexus",
         model: "LX 600",
         price: "13000",
@@ -38,7 +38,7 @@ const cars = [
     },
     {
         id: "3",
-        year: "2017",
+        year: "2015",
         make: "Honda",
         model: "Civic",
         price: "20000",
@@ -47,7 +47,7 @@ const cars = [
     {
         id: "4",
         year: "2019",
-        make: "Acura",
+        make: "Acura ",
         model: "MDX",
         price: "60000",
         personId: "2",
@@ -70,10 +70,10 @@ const cars = [
     },
     {
         id: "7",
-        year: "2019",
+        year: "2017",
         make: "Volkswagen",
         model: "Golf",
-        price: "40000",
+        price: "40005",
         personId: "3",
     },
     {
@@ -106,26 +106,17 @@ const typeDefs = gql`
     make: String!
     model: String!
     price: String!
-    personId: String!
   }
   type Query {
     person(id: String!): Person
     people: [Person]
     car(id: String!): Car
     cars: [Car]
-    getPersonCars(personId: String!):[cars]
+    personWithCars(personId: String!): [Car]
   }
   type Mutation {
-    addPerson(
-      id: String,
-      firstName: String!,
-      lastName: String!
-    ): Person
-    updatePerson(
-      id: String!,
-      firstName: String,
-      lastName: String
-    ): Person
+    addPerson(id: String, firstName: String!, lastName: String!): Person
+    updatePerson(id: String!, firstName: String, lastName: String): Person
     removePerson(id: String!): Person
     addCar(
       id: String
@@ -149,19 +140,21 @@ const typeDefs = gql`
 
 const resolvers = {
     Query: {
-        people: () => people,
         person(parent, args, context, info) {
             return find(people, { id: args.id });
         },
-        cars: () => cars,
+        people: () => people,
+
         car(parent, args, context, info) {
             return find(cars, { id: args.id });
         },
-        personWithCar(parent, args, context, info) {
-            return cars.filter((car) => car.personId === args.personId);
-        }
-    },
 
+        cars: () => cars,
+
+        personWithCars(parent, args, context, info) {
+            return cars.filter((car) => car.personId === args.personId);
+        },
+    },
     Mutation: {
         addPerson(root, args) {
             const newPerson = {
@@ -232,10 +225,9 @@ const resolvers = {
             }
 
             remove(cars, { id: args.id });
-
             return removedCar;
         },
     },
 };
 
-export { typeDefs, resolvers }
+export { typeDefs, resolvers };
