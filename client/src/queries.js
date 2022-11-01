@@ -125,10 +125,9 @@ export const UPDATE_CAR = gql`
 
 
 //Get person owning Cars
-
 export const GET_PERSON_WITH_CARS = gql`
   query Query($id: String!, $personId: String!) {
-    carByPerson(personId: $id) {
+    personWithCars(personId: $id) {
       id
       year
       make
