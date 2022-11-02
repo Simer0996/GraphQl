@@ -7,10 +7,9 @@ import Car from "../listItems/Car";
 import { useQuery } from "@apollo/client";
 import { GET_CARS } from "../../queries";
 import { List } from "antd";
+import { Link } from "react-router-dom";
 
 const Person = (props) => {
-
-  const [idTest] = useState(props.id);
   const [firstName, setFirstName] = useState(props.firstName);
   const [lastName, setLastName] = useState(props.lastName);
   const [editMode, setEditMode] = useState(false);
@@ -49,14 +48,13 @@ const Person = (props) => {
       ) : (
         <Card
           actions={[
-            // <LearnMore id={props.id} />,
             <EditOutlined key="edit" onClick={handleButtonClick} />,
-            <RemovePerson id={idTest} />,
+            <RemovePerson id={props.id} />,
           ]}
         >
           {firstName} {lastName}
           {data.cars.map(({ id, year, make, model, price, personId }) => {
-            if (personId === idTest) {
+            if (personId === props.id) {
               return (
                 <List.Item key={id}>
                   <Car
@@ -71,6 +69,12 @@ const Person = (props) => {
               );
             }
           })}
+          <Link
+            to={`/people/${props.id}`}
+            style={{
+              color: 'navy',
+            }}
+          >Learn More </Link>
         </Card>
       )}
     </div>
