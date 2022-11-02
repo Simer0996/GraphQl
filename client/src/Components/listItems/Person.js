@@ -52,7 +52,7 @@ const Person = (props) => {
             <RemovePerson id={props.id} />,
           ]}
         >
-          {firstName} {lastName}
+          <span><i><b>{firstName} {lastName}</b></i></span>
           {data.cars.map(({ id, year, make, model, price, personId }) => {
             if (personId === props.id) {
               return (
