@@ -44,6 +44,7 @@ const AddCar = () => {
   if (loading) return "Loading...";
   if (error) return `Error! ${error.message}`;
 
+
   return <><h2>Add a Car</h2>{data.people.length === 0 ? (
     ""
   ) : (

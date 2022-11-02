@@ -11,9 +11,7 @@ const UpdateCar = (props) => {
   const [model, setModel] = useState(props.model);
   const [price, setPrice] = useState(props.price);
   const [personId, setPersonId] = useState(props.personId);
-
   const [updateCar] = useMutation(UPDATE_CAR);
-
   const [form] = Form.useForm();
   const [, forceUpdate] = useState();
 

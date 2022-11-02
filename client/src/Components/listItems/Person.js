@@ -74,7 +74,7 @@ const Person = (props) => {
             style={{
               color: 'navy',
             }}
-          >Learn More </Link>
+          >Learn More</Link>
         </Card>
       )}
     </div>

@@ -9,7 +9,6 @@ const UpdatePerson = (props) => {
   const [firstName, setFirstName] = useState(props.firstName);
   const [lastName, setLastName] = useState(props.lastName);
   const [updatePerson] = useMutation(UPDATE_PERSON);
-
   const [form] = Form.useForm();
   const [, forceUpdate] = useState();
 
@@ -27,7 +26,6 @@ const UpdatePerson = (props) => {
         lastName,
       },
     });
-
     props.onButtonClick();
   };
 
