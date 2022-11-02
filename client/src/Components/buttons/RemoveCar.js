@@ -12,7 +12,7 @@ const RemoveCar = (props) => {
       cache.writeQuery({
         query: GET_CARS,
         data: {
-          cars: filter(cars, (c) => c.id !== removeCar.id),
+          cars: filter(cars, (o) => o.id !== removeCar.id),
         },
       });
     },
