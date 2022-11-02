@@ -1,19 +1,15 @@
-import React from 'react'
-
 const getStyles = () => ({
-    title: {
-        fontSize: 50,
-        padding: "15px",
-        marginBottom: "50p"
-    }
-}
-)
+  title: {
+    fontSize: 50,
+    padding: "10px",
+    marginBottom: "50px",
+  },
+});
+
 const Title = () => {
-    const styles = getStyles()
+  const styles = getStyles();
 
-    return (
-        <h1 style={styles.title}>People and their Cars</h1>
-    )
-}
+  return <h1 style={styles.title}>React Apollo GraphQL</h1>;
+};
 
-export default Title
+export default Title;

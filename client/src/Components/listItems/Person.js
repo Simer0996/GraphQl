@@ -1,52 +1,80 @@
-import React, { useState } from 'react'
-import { Card } from 'antd'
-import RemovePerson from '../buttons/RemovePerson'
-import { EditOutlined } from '@ant-design/icons'
-import UpdatePerson from '../forms/UpdatePerson'
-import Car from './Car'
-import { Link } from 'react-router-dom'
+import { useState } from "react";
+import { Card } from "antd";
+import RemovePerson from "../buttons/RemovePerson";
+import { EditOutlined } from "@ant-design/icons";
+import UpdatePerson from "../forms/UpdatePerson";
+import Car from "../listItems/Car";
+import { useQuery } from "@apollo/client";
+import { GET_CARS } from "../../queries";
+import { List } from "antd";
 
-const getStyles = () => ({
-    card: {
-        width: '500px'
+const Person = (props) => {
+
+  const [idTest] = useState(props.id);
+  const [firstName, setFirstName] = useState(props.firstName);
+  const [lastName, setLastName] = useState(props.lastName);
+  const [editMode, setEditMode] = useState(false);
+
+  const handleButtonClick = () => {
+    setEditMode(!editMode);
+  };
+
+  const updateStateVariable = (variable, value) => {
+    switch (variable) {
+      case "firstName":
+        setFirstName(value);
+        break;
+      case "lastName":
+        setLastName(value);
+        break;
+      default:
+        break;
     }
-})
+  };
 
-const Person = ({ id, firstName, lastName, carOwner }) => {
-    const [editMode, setEditMode] = useState(false)
-    const handleEdit = () => {
-        setEditMode(!editMode)
-    }
+  const { loading, error, data } = useQuery(GET_CARS);
+  if (loading) return "Loading...";
+  if (error) return `Error! ${error.message}`;
 
-    // console.log(carOwner)
-    const styles = getStyles()
-    return (
-        <>
-            {editMode ? <UpdatePerson id={id} firstName={firstName} lastName={lastName} onButtonClick={handleEdit} /> :
-                <Card style={styles.card} actions={[
-                    <EditOutlined key='edit' onClick={handleEdit} />,
-                    <RemovePerson id={id} />
-                ]}>
-                    <p> {firstName} {lastName}</p>
-
-
-
-                    {carOwner?.map(car => (
-                        <Car key={car.id} make={car.make} model={car.model} />
-                    ))}
-                    <Link
-                        to={`/people/${id}`}
-                        style={{
-                            textDecoration: 'underline',
-                            color: 'blue',
-                        }}
-                    >Learn More</Link>
-                </Card>
+  return (
+    <div>
+      {editMode ? (
+        <UpdatePerson
+          id={props.id}
+          firstName={props.firstName}
+          lastName={props.lastName}
+          onButtonClick={handleButtonClick}
+          updateStateVariable={updateStateVariable}
+        />
+      ) : (
+        <Card
+          actions={[
+            // <LearnMore id={props.id} />,
+            <EditOutlined key="edit" onClick={handleButtonClick} />,
+            <RemovePerson id={idTest} />,
+          ]}
+        >
+          {firstName} {lastName}
+          {data.cars.map(({ id, year, make, model, price, personId }) => {
+            if (personId === idTest) {
+              return (
+                <List.Item key={id}>
+                  <Car
+                    id={id}
+                    year={year}
+                    make={make}
+                    model={model}
+                    price={price}
+                    personId={personId}
+                  />
+                </List.Item>
+              );
             }
+          })}
+        </Card>
+      )}
+    </div>
+  );
+};
 
-
-        </>
-    )
-}
-
-export default Person
+export default Person;

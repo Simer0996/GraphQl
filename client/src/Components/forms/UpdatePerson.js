@@ -1,54 +1,92 @@
-import React, { useState, useEffect } from 'react'
-import { Form, Input, Button } from 'antd'
-import { useMutation } from '@apollo/client'
-import { UPDATE_PERSON } from '../../queries'
+import { useEffect, useState } from "react";
+import { useMutation } from "@apollo/client";
+import { Button, Form, Input } from "antd";
 
-const UpdatePerson = ({ onButtonClick, id, firstName, lastName }) => {
+import { UPDATE_PERSON } from "../../queries";
 
-    const [updatePerson] = useMutation(UPDATE_PERSON)
-    const [form] = Form.useForm()
-    const [, forceUpdate] = useState()
+const UpdatePerson = (props) => {
+  const [id] = useState(props.id);
+  const [firstName, setFirstName] = useState(props.firstName);
+  const [lastName, setLastName] = useState(props.lastName);
+  const [updatePerson] = useMutation(UPDATE_PERSON);
 
-    useEffect(() => {
-        forceUpdate()
-    }, [])
+  const [form] = Form.useForm();
+  const [, forceUpdate] = useState();
 
-    const onFinish = values => {
-        const { firstName, lastName } = values
-        updatePerson({
-            variables: {
-                id,
-                firstName,
-                lastName,
-            }
-        })
-        onButtonClick()
+  useEffect(() => {
+    forceUpdate({});
+  }, []);
+
+  const onFinish = (values) => {
+    const { firstName, lastName } = values;
+
+    updatePerson({
+      variables: {
+        id,
+        firstName,
+        lastName,
+      },
+    });
+
+    props.onButtonClick();
+  };
+
+  const updateStateVariable = (variable, value) => {
+    props.updateStateVariable(variable, value);
+    switch (variable) {
+      case "firstName":
+        setFirstName(value);
+        break;
+      case "lastName":
+        setLastName(value);
+        break;
+      default:
+        break;
     }
+  };
 
-    return (
-        <Form form={form} name='update-people-form' layout='inline' onFinish={onFinish} >
-            <Form.Item name="firstName" rules={[{ required: true, message: "Please input your first name" }]} >
-                <Input placeholder='i.e. john' />
-            </Form.Item>
-            <Form.Item name="lastName" rules={[{ required: true, message: "Please input your last name" }]} >
-                <Input placeholder='i.e. smith' />
-            </Form.Item>
-            <Form.Item shouldUpdate={true}>
-                {() => (
-                    <Button type="primary" htmlType='submit'
-                        disabled={
-                            (!form.isFieldsTouched(firstName) && !form.isFieldsTouched(lastName)) ||
-                            form.getFieldError().filter(({ errors }) => errors.length).length
-                        }
-                    >Update </Button>
-                )}
+  return (
+    <Form
+      form={form}
+      name="update-contact-form"
+      layout="inline"
+      onFinish={onFinish}
+      initialValues={{
+        firstName: firstName,
+        lastName: lastName,
+      }}
+    >
+      <Form.Item
+        name="firstName"
+        rules={[{ required: true, message: "Please input your first name!" }]}
+      >
+        <Input
+          placeholder="First Name"
+          onChange={(e) => updateStateVariable("firstName", e.target.value)}
+        />
+      </Form.Item>
+      <Form.Item
+        name="lastName"
+        rules={[{ required: true, message: "Please input your last name!" }]}
+      >
+        <Input
+          placeholder="Last Name"
+          onChange={(e) => updateStateVariable("lastName", e.target.value)}
+        />
+      </Form.Item>
+      <Form.Item shouldUpdate={true}>
+        {() => (
+          <Button
+            type="primary"
+            htmlType="submit"
+          >
+            Update Person
+          </Button>
+        )}
+      </Form.Item>
+      <Button onClick={props.onButtonClick}>Cancel</Button>
+    </Form >
+  );
+};
 
-            </Form.Item>
-            <Form.Item>
-                <Button type='danger' onClick={onButtonClick}>Cancel </Button>
-            </Form.Item>
-        </Form >
-    )
-}
-
-export default UpdatePerson
+export default UpdatePerson;

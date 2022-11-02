@@ -1,36 +1,42 @@
 import React from 'react'
-import { DeleteOutlined } from '@ant-design/icons'
-import { useMutation } from '@apollo/client'
-import { GET_CARS, REMOVE_CAR } from "../../queries"
-import filter from 'lodash/filter'
+import { useMutation } from "@apollo/client";
+import { filter } from "lodash";
+import { DeleteOutlined } from "@ant-design/icons";
+import { GET_CARS, REMOVE_CAR } from "../../queries";
 
-const RemovePerson = ({ id }) => {
-
-    const [removeCar] = useMutation(REMOVE_CAR, {
-        update(cache, { data: { removeCar } }) {
-            const { cars } = cache.readQuery({ query: GET_CARS });
-            cache.writeQuery({
-                query: GET_CARS,
-                data: {
-                    cars: filter(cars, (o) => o.id !== removeCar.id),
-                },
-            });
+const RemoveCar = (props) => {
+  const { id } = props;
+  const [removeCar] = useMutation(REMOVE_CAR, {
+    update(cache, { data: { removeCar } }) {
+      const { cars } = cache.readQuery({ query: GET_CARS });
+      cache.writeQuery({
+        query: GET_CARS,
+        data: {
+          cars: filter(cars, (c) => c.id !== removeCar.id),
         },
-    });
+      });
+    },
+  });
 
-    const handleDelete = () => {
-        let result = window.confirm("Are you sure you want to delete this record?")
-        if (result) {
-            removeCar({
-                variable: {
-                    id,
-                }
-            })
-        }
+  const handleButtonClick = () => {
+    let result = window.confirm("Are you sure you want to remove this car?");
+
+    if (result) {
+      removeCar({
+        variables: {
+          id,
+        },
+      });
     }
-    return (
-        <div><DeleteOutlined key='delete' onClick={handleDelete} style={{ color: 'red' }} /></div>
-    )
-}
+  };
 
-export default RemovePerson
+  return (
+    <DeleteOutlined
+      key="delete"
+      onClick={handleButtonClick}
+      style={{ color: "red" }}
+    />
+  );
+};
+
+export default RemoveCar;

@@ -100,13 +100,16 @@ const typeDefs = gql`
     firstName: String!
     lastName: String!
   }
+
   type Car {
     id: String!
     year: String!
     make: String!
     model: String!
     price: String!
+    personId: String!
   }
+
   type Query {
     person(id: String!): Person
     people: [Person]
@@ -114,10 +117,12 @@ const typeDefs = gql`
     cars: [Car]
     personWithCars(personId: String!): [Car]
   }
+
   type Mutation {
     addPerson(id: String, firstName: String!, lastName: String!): Person
     updatePerson(id: String!, firstName: String, lastName: String): Person
     removePerson(id: String!): Person
+
     addCar(
       id: String
       year: String!
@@ -126,6 +131,7 @@ const typeDefs = gql`
       price: String!
       personId: String!
     ): Car
+
     updateCar(
       id: String!
       year: String
@@ -134,6 +140,7 @@ const typeDefs = gql`
       price: String
       personId: String
     ): Car
+
     removeCar(id: String!): Car
   }
 `;
@@ -171,10 +178,8 @@ const resolvers = {
             if (!person) {
                 throw new Error(`Couldn't find person with id ${args.id}`);
             }
-
             person.firstName = args.firstName;
             person.lastName = args.lastName;
-
             return person;
         },
 
@@ -183,9 +188,7 @@ const resolvers = {
             if (!removedPerson) {
                 throw new Error(`Couldn't find person with id ${args.id}`);
             }
-
             remove(people, { id: args.id });
-
             return removedPerson;
         },
 
@@ -199,7 +202,6 @@ const resolvers = {
                 personId: args.personId,
             };
             cars.push(newCar);
-
             return newCar;
         },
 
@@ -208,13 +210,11 @@ const resolvers = {
             if (!car) {
                 throw new Error(`Couldn't find car with id ${args.id}`);
             }
-
             car.year = args.year;
             car.make = args.make;
             car.model = args.model;
             car.price = args.price;
             car.personId = args.personId;
-
             return car;
         },
 
@@ -223,7 +223,6 @@ const resolvers = {
             if (!removedCar) {
                 throw new Error(`Couldn't find car with id ${args.id}`);
             }
-
             remove(cars, { id: args.id });
             return removedCar;
         },

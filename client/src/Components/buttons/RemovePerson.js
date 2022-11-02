@@ -1,46 +1,42 @@
 import React from 'react'
-import { DeleteOutlined } from '@ant-design/icons'
-import { useMutation } from '@apollo/client'
-import { GET_PEOPLE, REMOVE_PERSON, REMOVE_CAR } from "../../queries"
-import filter from 'lodash/filter'
+import { useMutation } from "@apollo/client";
+import { filter } from "lodash";
+import { DeleteOutlined } from "@ant-design/icons";
+import { GET_PEOPLE, REMOVE_PERSON } from "../../queries";
 
-const RemovePerson = ({ id, carOwner }) => {
-
-    const [removePerson] = useMutation(REMOVE_PERSON, {
-        update(cache, { data: { removePerson } }) {
-            const { people } = cache.readQuery({ query: GET_PEOPLE });
-            cache.writeQuery({
-                query: GET_PEOPLE,
-                data: {
-                    people: filter(people, (o) => o.id !== removePerson.id),
-                },
-            });
+const RemovePerson = (props) => {
+  const { id } = props;
+  const [removePerson] = useMutation(REMOVE_PERSON, {
+    update(cache, { data: { removePerson } }) {
+      const { people } = cache.readQuery({ query: GET_PEOPLE });
+      cache.writeQuery({
+        query: GET_PEOPLE,
+        data: {
+          people: filter(people, (c) => c.id !== removePerson.id),
         },
-    });
+      });
+    },
+  });
 
-    const [removeCar] = useMutation(REMOVE_CAR)
+  const handleButtonClick = () => {
+    let result = window.confirm("Are you sure you want to remove this person?");
 
-    const handleDelete = () => {
-        let result = window.confirm("Are you sure you want to delete this record?")
-        if (result) {
-            removePerson({
-                variable: {
-                    id
-                }
-            })
-
-            for (let i = 0; i < carOwner.length; i++) {
-                removeCar({
-                    variable: {
-                        id: carOwner[i].id
-                    }
-                })
-            }
-        }
+    if (result) {
+      removePerson({
+        variables: {
+          id,
+        },
+      });
     }
-    return (
-        <div><DeleteOutlined key='delete' onClick={handleDelete} style={{ color: 'red' }} /></div>
-    )
-}
+  };
 
-export default RemovePerson
+  return (
+    <DeleteOutlined
+      key="delete"
+      onClick={handleButtonClick}
+      style={{ color: "red" }}
+    />
+  );
+};
+
+export default RemovePerson;
