@@ -12,7 +12,7 @@ const RemovePerson = (props) => {
       cache.writeQuery({
         query: GET_PEOPLE,
         data: {
-          people: filter(people, (c) => c.id !== removePerson.id),
+          people: filter(people, (o) => o.id !== removePerson.id),
         },
       });
     },

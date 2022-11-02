@@ -56,7 +56,7 @@ const AddPerson = () => {
             },
           ]}
         >
-          <Input placeholder="First Name"></Input>
+          <p> First Name: <Input placeholder="First Name"></Input></p>
         </Form.Item>
         <Form.Item
           name="lastName"
@@ -67,11 +67,12 @@ const AddPerson = () => {
             },
           ]}
         >
-          <Input placeholder="Last Name"></Input>
+          <p>Last Name: <Input placeholder="Last Name"></Input></p>
         </Form.Item>
         <Form.Item shouldUpdate={true}>
           {() => (
             <Button
+              style={{ marginTop: "22px" }}
               type="primary"
               htmlType="submit"
               disabled={
