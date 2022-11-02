@@ -4,8 +4,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from './Components/screens/Home'
 import ShowDetails from "./Components/screens/ShowDetails";
 
-
-
 const client = new ApolloClient({
   uri: 'http://localhost:4000/graphql',
   cache: new InMemoryCache()
